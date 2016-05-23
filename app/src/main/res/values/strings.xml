@@ -1,4 +1,11 @@
 <resources>
+
     <string name="app_name">Interval</string>
-    <string name="hello_world">Hello World!</string>
+
+    <string name="title_interval">Intervals</string>
+    <string name="title_interval_time">Interval Seconds</string>
+    <string name="title_interval_rest">Interval Rest Seconds</string>
+
+    <string name="start">START</string>
+
 </resources>

@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.wearable.activity.WearableActivity;
-import android.support.wearable.view.BoxInsetLayout;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.intencity.interval.R;
@@ -23,7 +23,7 @@ public class MainActivity extends WearableActivity
 
     private Context context;
 
-    private BoxInsetLayout containerView;
+    private ScrollView containerView;
     private TextView intervalTextView;
     private TextView intervalTimeTextView;
     private TextView intervalRestTextView;
@@ -45,7 +45,7 @@ public class MainActivity extends WearableActivity
 
         context = getApplicationContext();
 
-        containerView = (BoxInsetLayout)findViewById(R.id.container);
+        containerView = (ScrollView)findViewById(R.id.container);
         intervalTextView = (TextView)findViewById(R.id.text_view_interval);
         intervalTimeTextView = (TextView)findViewById(R.id.text_view_interval_time);
         intervalRestTextView = (TextView)findViewById(R.id.text_view_interval_rest);
@@ -57,7 +57,7 @@ public class MainActivity extends WearableActivity
         decrementIntervalRest = (ImageButton)findViewById(DECREMENT_INTERVAL_REST_ID);
         start = (Button) findViewById(R.id.start);
 
-        new Main(context, INCREMENT_INTERVAL_ID, DECREMENT_INTERVAL_ID, INCREMENT_INTERVAL_TIME_ID, DECREMENT_INTERVAL_TIME_ID, INCREMENT_INTERVAL_REST_ID, DECREMENT_INTERVAL_REST_ID, containerView, intervalTextView, intervalTimeTextView,
+        new Main(context, INCREMENT_INTERVAL_ID, DECREMENT_INTERVAL_ID, INCREMENT_INTERVAL_TIME_ID, DECREMENT_INTERVAL_TIME_ID, INCREMENT_INTERVAL_REST_ID, DECREMENT_INTERVAL_REST_ID, intervalTextView, intervalTimeTextView,
                  intervalRestTextView, incrementInterval, decrementInterval, incrementIntervalTime, decrementIntervalTime, incrementIntervalRest, decrementIntervalRest, start, IntervalActivity.class);
     }
 

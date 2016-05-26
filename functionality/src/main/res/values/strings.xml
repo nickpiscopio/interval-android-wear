@@ -9,8 +9,8 @@
     <string name="start">START</string>
 
     <string name="title_warm_up">WARM-UP</string>
-    <string name="title_interval">FAST</string>
-    <string name="title_rest">SLOW</string>
+    <string name="title_interval">SPRINT</string>
+    <string name="title_rest">WALK</string>
     <string name="title_cool_down">COOL DOWN</string>
     <string name="description_warm_up">GET WARM</string>
 

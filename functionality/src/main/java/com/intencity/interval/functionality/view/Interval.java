@@ -157,25 +157,25 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
             switch (activityState)
             {
                 case WARM_UP:
-                    setBackgroundColor(R.color.secondary_dark);
+                    setBackgroundColor(container, R.color.secondary_dark);
                     title.setText(warmUpTitle);
                     scaleTitle();
                     interval = INJURY_PREVENTION_MILLIS;
                     break;
                 case INTERVAL:
-                    setBackgroundColor(R.color.primary);
+                    setBackgroundColor(container, R.color.primary);
                     title.setText(intervalTitle);
                     scaleTitle();
                     interval = intervalSeconds;
                     break;
                 case REST:
-                    setBackgroundColor(R.color.secondary_light);
+                    setBackgroundColor(container, R.color.secondary_light);
                     title.setText(restTitle);
                     scaleTitle();
                     interval = intervalRestSeconds;
                     break;
                 case COOL_DOWN:
-                    setBackgroundColor(R.color.secondary_dark);
+                    setBackgroundColor(container, R.color.secondary_dark);
                     title.setText(coolDownTitle);
                     scaleTitle();
                     interval = INJURY_PREVENTION_MILLIS;
@@ -326,22 +326,35 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
     /**
      * Fades the new background color in.
      *
+     * @param view      The view we are changing.
      * @param colorRes  The resource color of the background.
      */
-    private void setBackgroundColor(int colorRes)
+    private void setBackgroundColor(View view, int colorRes)
     {
         int fadeDuration = 750;
         int color = Color.TRANSPARENT;
-        Drawable background = container.getBackground();
+        Drawable background = view.getBackground();
         if (background instanceof ColorDrawable)
         {
             color = ((ColorDrawable)background).getColor();
         }
 
-        ObjectAnimator
-                colorFade = ObjectAnimator.ofObject(container, "backgroundColor", new ArgbEvaluator(), color, ContextCompat
-                .getColor(context, colorRes));
+        ObjectAnimator colorFade = ObjectAnimator.ofObject(view, "backgroundColor", new ArgbEvaluator(), color, ContextCompat.getColor(context, colorRes));
         colorFade.setDuration(fadeDuration);
+        colorFade.start();
+    }
+
+    /**
+     * Fades the new background color in.
+     *
+     * @param view      The textview we are changing.
+     * @param colorRes  The resource color of the background.
+     * @param duration  The duration it takes in millis to change.
+     */
+    private void setColor(TextView view, int colorRes, int duration)
+    {
+        ObjectAnimator colorFade = ObjectAnimator.ofObject(view, "textColor", new ArgbEvaluator(), view.getCurrentTextColor(), ContextCompat.getColor(context, colorRes));
+        colorFade.setDuration(duration);
         colorFade.start();
     }
 
@@ -350,17 +363,21 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
      */
     private void scaleTitle()
     {
+        final int duration = 300;
         float scale = 1.4f;
-        int duration = 300;
 
-        final ObjectAnimator anim = ObjectAnimator.ofPropertyValuesHolder(title, PropertyValuesHolder
-                .ofFloat("scaleX", scale), PropertyValuesHolder.ofFloat("scaleY", scale));
+        final ObjectAnimator anim = ObjectAnimator.ofPropertyValuesHolder(title, PropertyValuesHolder.ofFloat("scaleX", scale), PropertyValuesHolder.ofFloat("scaleY", scale));
         anim.setDuration(duration);
 
         anim.setRepeatCount(1);
         anim.setRepeatMode(ObjectAnimator.REVERSE);
 
         anim.start();
+
+        // This needs to be 0.
+        // If it isn't 0, then the color never changes for the title.
+        setColor(title, android.R.color.white, 0);
+        setColor(title, R.color.white_transparent, 750);
     }
 
     /**

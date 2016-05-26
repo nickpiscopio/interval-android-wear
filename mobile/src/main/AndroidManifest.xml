@@ -2,25 +2,32 @@
 <manifest package="com.intencity.interval"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/intencity_icon"
         android:label="@string/app_name">
+
         <activity
-            android:name="com.intencity.interval.view.activity.MainActivity"
+            android:name=".view.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.Base">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
-            android:name="com.intencity.interval.view.activity.AboutActivity"
+            android:name="com.intencity.interval.view.IntervalActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base"/>
+
+        <activity
+            android:name="com.intencity.interval.view.AboutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base"/>

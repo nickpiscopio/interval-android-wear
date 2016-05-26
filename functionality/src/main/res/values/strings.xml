@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">Interval</string>
+    <string name="copyright">&#169; Interval 2016. All Rights Reserved.</string>
 
     <string name="title_intervals">Intervals</string>
     <string name="title_interval_time">Interval Seconds</string>
@@ -15,5 +16,12 @@
     <string name="description_warm_up">GET WARM</string>
 
     <string name="seconds">s</string>
+
+    <!-- About -->
+    <string name="title_about">About</string>
+    <string name="title_mission">MISSION</string>
+    <string name="title_founders">FOUNDERS</string>
+    <string name="title_contributors">CONTRIBUTIONS</string>
+    <string name="title_version">VERSION</string>
 
 </resources>

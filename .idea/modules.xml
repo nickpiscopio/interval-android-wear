@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/interval/interval.iml" filepath="$PROJECT_DIR$/interval/interval.iml" />
+      <module fileurl="file://$PROJECT_DIR$/functionality/functionality.iml" filepath="$PROJECT_DIR$/functionality/functionality.iml" />
       <module fileurl="file://$PROJECT_DIR$/intervalandroid.iml" filepath="$PROJECT_DIR$/intervalandroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
     </modules>
   </component>
 </project>

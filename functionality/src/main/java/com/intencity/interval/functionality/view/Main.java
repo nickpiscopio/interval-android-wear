@@ -2,6 +2,7 @@ package com.intencity.interval.functionality.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +15,11 @@ public class Main
 {
     private final int INTERVAL_MIN_THRESHOLD = 1;
 
-    private int intervals = 1;
-    private int intervalSeconds = 10;
-    private int intervalRestSeconds = 10;
+    private int intervals;
+    private int intervalSeconds;
+    private int intervalRestSeconds;
+
+    private SharedPreferences prefs;
 
     // FROM UI
     private Context context;
@@ -81,6 +84,11 @@ public class Main
         decrementIntervalRest.setOnClickListener(decrementIntervalClickListener);
         start.setOnClickListener(startClickListener);
 
+        prefs = context.getSharedPreferences(Constant.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        intervals = prefs.getInt(Constant.BUNDLE_INTERVALS, 1);
+        intervalSeconds = prefs.getInt(Constant.BUNDLE_INTERVAL_MILLIS, 10);
+        intervalRestSeconds = prefs.getInt(Constant.BUNDLE_INTERVAL_REST_MILLIS, 10);
+
         setIntervals(intervalTextView, intervals);
         setIntervals(intervalTimeTextView, intervalSeconds);
         setIntervals(intervalRestTextView, intervalRestSeconds);
@@ -138,6 +146,12 @@ public class Main
         @Override
         public void onClick(View v)
         {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(Constant.BUNDLE_INTERVALS, intervals);
+            editor.putInt(Constant.BUNDLE_INTERVAL_MILLIS, intervalSeconds);
+            editor.putInt(Constant.BUNDLE_INTERVAL_REST_MILLIS, intervalRestSeconds);
+            editor.apply();
+
             Intent intent = new Intent(context, cls);
             intent.putExtra(Constant.BUNDLE_INTERVALS, intervals);
             intent.putExtra(Constant.BUNDLE_INTERVAL_MILLIS, intervalSeconds * Constant.ONE_SECOND_MILLIS);

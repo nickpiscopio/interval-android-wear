@@ -1,10 +1,27 @@
 <resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Demo -->
+    <dimen name="pager_margin">3dp</dimen>
+    <dimen name="cursor">2dp</dimen>
 
-    <dimen name="divider_width">16dp</dimen>
-    <dimen name="divider_height">1dp</dimen>
+    <!-- Sign In -->
+    <dimen name="logo_margin">32dp</dimen>
 
-    <dimen name="layout_margin">8dp</dimen>
-    <dimen name="layout_margin_half">4dp</dimen>
-    <dimen name="layout_margin_quarter">2dp</dimen>
+    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_margin_half">8dp</dimen>
+    <dimen name="layout_margin_quarter">4dp</dimen>
+    <dimen name="related_item_margin">5dp</dimen>
+
     <dimen name="rounded_corner_radius">4dp</dimen>
+
+    <dimen name="divider_height">0.5dp</dimen>
+
+    <dimen name="demo_title_size">26sp</dimen>
+    <dimen name="demo_text_size">16sp</dimen>
+
+    <dimen name="card_title_size">16sp</dimen>
+    <dimen name="card_title2_size">12sp</dimen>
+    <dimen name="card_title3_size">10sp</dimen>
+    <dimen name="card_text_size">14sp</dimen>
+
 </resources>

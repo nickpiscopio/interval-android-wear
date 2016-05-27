@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.support.wearable.view.BoxInsetLayout;
 import android.support.wearable.view.DelayedConfirmationView;
@@ -40,8 +41,6 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
     private int intervalItem = 0;
     private int currentInterval = 0;
 
-    private ActivityState activityState;
-
     private String warmUpTitle;
     private String intervalTitle;
     private String restTitle;
@@ -50,7 +49,10 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
     private LayoutInflater inflater;
     private Resources res;
 
+    private ActivityState activityState;
     private ExerciseState exerciseState;
+
+    private Vibrator vibrator;
 
     // View
     private Context context;
@@ -102,6 +104,8 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
 
         pause.setOnClickListener(pauseClickLister);
 
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+
         addIntervalChart();
 
         startTimer(TimerState.INIT, Constant.CODE_FAILED);
@@ -146,6 +150,7 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
     {
         // The time we are displaying on the interval count down.
         int interval = 0;
+        long[] vibrationDuration = { 0, 250 };
 
         if (state == TimerState.INIT)
         {
@@ -161,24 +166,35 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
                     title.setText(warmUpTitle);
                     scaleTitle();
                     interval = INJURY_PREVENTION_MILLIS;
+
+                    // 2 vibrations
+                    vibrationDuration = new long[]{ 0, 250, 250, 250 };
                     break;
                 case INTERVAL:
                     setBackgroundColor(container, R.color.primary);
                     title.setText(intervalTitle);
                     scaleTitle();
                     interval = intervalSeconds;
+
+                    vibrationDuration = new long[]{ 0, 500 };
                     break;
                 case REST:
                     setBackgroundColor(container, R.color.secondary_light);
                     title.setText(restTitle);
                     scaleTitle();
                     interval = intervalRestSeconds;
+
+                    // 3 vibrations
+                    vibrationDuration = new long[]{ 0, 100, 100, 100, 100, 100 };
                     break;
                 case COOL_DOWN:
                     setBackgroundColor(container, R.color.secondary_dark);
                     title.setText(coolDownTitle);
                     scaleTitle();
                     interval = INJURY_PREVENTION_MILLIS;
+
+                    // 2 vibrations
+                    vibrationDuration = new long[]{ 0, 250, 250, 250 };
                     break;
                 default:
                     break;
@@ -247,11 +263,31 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         delayedView.start();
 
         countDownTimer.start();
+
+        notifyUserOfIntervalChange(vibrationDuration);
     }
 
     private void cancelTimer()
     {
         countDownTimer.cancel();
+    }
+
+    /**
+     * Notifies the user of an interval change.
+     *
+     * @param duration      The pattern duration to vibrate.
+     */
+    private void notifyUserOfIntervalChange(long[] duration)
+    {
+        vibrator.vibrate(duration, Constant.CODE_FAILED);
+
+//        try {
+//            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//            Ringtone r = RingtoneManager.getRingtone(context, notification);
+//            r.play();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**

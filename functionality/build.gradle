@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+// Turned offline work on in the preferences to make deploying faster.
+// Documentation: http://stackoverflow.com/questions/16775197/building-and-running-app-via-gradle-and-android-studio-is-slower-than-via-eclips
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"

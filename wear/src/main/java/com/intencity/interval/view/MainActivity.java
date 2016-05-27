@@ -2,7 +2,6 @@ package com.intencity.interval.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -84,15 +83,15 @@ public class MainActivity extends WearableActivity
 
     private void updateDisplay()
     {
-        if (isAmbient())
-        {
-            containerView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.black));
-            intervalTextView.setTextColor(ContextCompat.getColor(context, android.R.color.white));
-        }
-        else
-        {
-            containerView.setBackground(null);
-            intervalTextView.setTextColor(ContextCompat.getColor(context, R.color.secondary_dark));
-        }
+//        if (isAmbient())
+//        {
+//            containerView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.black));
+//            intervalTextView.setTextColor(ContextCompat.getColor(context, android.R.color.white));
+//        }
+//        else
+//        {
+//            containerView.setBackground(null);
+//            intervalTextView.setTextColor(ContextCompat.getColor(context, R.color.secondary_dark));
+//        }
     }
 }

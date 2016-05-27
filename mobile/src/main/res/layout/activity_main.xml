@@ -68,21 +68,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/layout_margin">
 
-            <ImageButton
-                android:id="@+id/button_decrement"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/subtract"
-                android:background="@null"/>
+                android:layout_weight="1">
 
-            <ImageButton
-                android:id="@+id/button_increment"
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/button_decrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/circle_button_padding"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/subtract"
+                    android:background="@drawable/circle"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/add"
-                android:background="@null"/>
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/button_increment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/circle_button_padding"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/add"
+                    android:background="@drawable/circle"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

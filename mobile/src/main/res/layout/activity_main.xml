@@ -12,10 +12,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="@dimen/layout_margin"
+        android:animateLayoutChanges="true"
         app:layout_box="all">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/layout_margin_half"
             android:textColor="@color/page_background"
@@ -27,52 +29,16 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/button_decrement_interval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/subtract"
-                android:background="@null"/>
-
             <TextView
                 android:id="@+id/text_view_interval"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textAlignment="center"
-                android:text="@string/title_interval"/>
-
-            <ImageButton
-                android:id="@+id/button_increment_interval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/add"
-                android:background="@null"/>
-
-        </LinearLayout>
-
-        <include layout="@layout/divider"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_margin_half"
-            android:textColor="@color/page_background"
-            android:text="@string/title_interval_time"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/button_decrement_interval_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/subtract"
-                android:background="@null"/>
+                android:gravity="center"
+                android:padding="@dimen/layout_margin"
+                android:textSize="@dimen/title3_size"
+                android:text="1"/>
 
             <TextView
                 android:id="@+id/text_view_interval_time"
@@ -80,39 +46,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textAlignment="center"
-                android:text="@string/title_interval"/>
-
-            <ImageButton
-                android:id="@+id/button_increment_interval_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/add"
-                android:background="@null"/>
-
-        </LinearLayout>
-
-        <include layout="@layout/divider"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_margin_half"
-            android:textColor="@color/page_background"
-            android:text="@string/title_interval_rest"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/button_decrement_interval_rest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/subtract"
-                android:background="@null"/>
+                android:gravity="center"
+                android:padding="@dimen/layout_margin"
+                android:textSize="@dimen/title3_size"
+                android:text="2"/>
 
             <TextView
                 android:id="@+id/text_view_interval_rest"
@@ -120,11 +57,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textAlignment="center"
-                android:text="@string/title_interval"/>
+                android:gravity="center"
+                android:padding="@dimen/layout_margin"
+                android:textSize="@dimen/title3_size"
+                android:text="3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/button_increment_interval_rest"
+                android:id="@+id/button_decrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/subtract"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/button_increment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/add"

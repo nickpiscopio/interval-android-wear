@@ -3,15 +3,15 @@
     <string name="app_name">Interval</string>
     <string name="copyright">&#169; Interval 2016. All Rights Reserved.</string>
 
-    <string name="title_intervals">Intervals</string>
-    <string name="title_interval_time">Interval Seconds</string>
-    <string name="title_interval_rest">Interval Rest Seconds</string>
+    <string name="title_intervals">INTERVALS</string>
+    <string name="title_interval_time">HIGH INTERVAL SECONDS</string>
+    <string name="title_interval_rest">LOW INTERVAL SECONDS</string>
 
     <string name="start">START</string>
 
     <string name="title_warm_up">WARM-UP</string>
-    <string name="title_interval">SPRINT</string>
-    <string name="title_rest">WALK</string>
+    <string name="title_interval">MAXIMUM EFFORT</string>
+    <string name="title_rest">LOW EFFORT</string>
     <string name="title_cool_down">COOL DOWN</string>
     <string name="description_warm_up">GET WARM</string>
 

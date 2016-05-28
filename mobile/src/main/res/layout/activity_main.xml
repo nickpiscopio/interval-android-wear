@@ -1,120 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/layout_margin"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
     android:background="@color/secondary_dark">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/layout_margin"
-        android:animateLayoutChanges="true"
-        app:layout_box="all">
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/layout_intervals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_margin"
+            android:gravity="bottom"
+            android:background="?android:attr/selectableItemBackground"
+            android:alpha="0.66"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_margin_half"
+                android:layout_marginBottom="@dimen/layout_margin_quarter"
+                android:src="@mipmap/icon_interval"/>
+
+            <TextView
+                android:id="@+id/text_view_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_size"
+                android:text="6"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_interval_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_margin"
+            android:gravity="bottom"
+            android:background="?android:attr/selectableItemBackground"
+            android:alpha="0.66"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_margin_half"
+                android:layout_marginBottom="@dimen/layout_margin_quarter"
+                android:src="@mipmap/icon_high_energy"/>
+
+            <TextView
+                android:id="@+id/text_view_interval_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_size"
+                android:text="20"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_interval_rest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_margin"
+            android:gravity="bottom"
+            android:background="?android:attr/selectableItemBackground"
+            android:alpha="0.66"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_margin_half"
+                android:layout_marginBottom="@dimen/layout_margin_quarter"
+                android:src="@mipmap/icon_low_energy"/>
+
+            <TextView
+                android:id="@+id/text_view_interval_rest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_size"
+                android:text="10"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/outline"
+        android:layout_marginLeft="@dimen/selected_interval_margin"
+        android:layout_marginRight="@dimen/selected_interval_margin"
+        android:paddingTop="@dimen/layout_margin_half"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_margin_half"
-            android:textColor="@color/page_background"
+            android:layout_gravity="center"
+            android:textColor="@color/white_transparent"
+            android:textSize="@dimen/title2_size"
             android:text="@string/title_intervals"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/text_view_interval"
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/button_decrement"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:padding="@dimen/layout_margin"
-                android:textSize="@dimen/title3_size"
-                android:text="1"/>
+                android:padding="@dimen/button_padding"
+                android:src="@mipmap/subtract"
+                android:background="?android:attr/selectableItemBackground"/>
 
             <TextView
-                android:id="@+id/text_view_interval_time"
+                android:id="@+id/text_view_editing"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
                 android:gravity="center"
-                android:padding="@dimen/layout_margin"
-                android:textSize="@dimen/title3_size"
+                android:textSize="@dimen/title_selected_size"
+                android:textStyle="bold"
                 android:text="2"/>
 
-            <TextView
-                android:id="@+id/text_view_interval_rest"
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/button_increment"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:padding="@dimen/layout_margin"
-                android:textSize="@dimen/title3_size"
-                android:text="3"/>
+                android:padding="@dimen/button_padding"
+                android:src="@mipmap/add"
+                android:background="?android:attr/selectableItemBackground"/>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/layout_margin">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/button_decrement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/circle_button_padding"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/subtract"
-                    android:background="@drawable/circle"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/button_increment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/circle_button_padding"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/add"
-                    android:background="@drawable/circle"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layout_margin"
-            android:layout_marginBottom="@dimen/start_screen_bottom_margin"
-            android:backgroundTint="@color/accent"
-            android:text="@string/start"
-            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 
-</ScrollView>
+    <Button
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:textColor="@android:color/white"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/button_full_deselected"
+        android:text="@string/start"/>
+
+</LinearLayout>

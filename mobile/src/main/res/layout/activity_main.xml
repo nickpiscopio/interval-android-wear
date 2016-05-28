@@ -103,8 +103,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@drawable/outline"
-        android:layout_marginLeft="@dimen/selected_interval_margin"
-        android:layout_marginRight="@dimen/selected_interval_margin"
         android:paddingTop="@dimen/layout_margin_half"
         android:orientation="vertical">
 

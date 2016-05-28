@@ -2,8 +2,9 @@
 
     <dimen name="divider_width">16dp</dimen>
     <dimen name="divider_height">0.5dp</dimen>
+    <dimen name="outline_width">1dp</dimen>
 
-    <dimen name="start_screen_bottom_margin">36dp</dimen>
+    <dimen name="start_screen_padding">14dp</dimen>
 
     <dimen name="layout_margin">8dp</dimen>
     <dimen name="layout_margin_half">4dp</dimen>
@@ -18,10 +19,11 @@
 
     <dimen name="chart_interval_max_height">25dp</dimen>
 
-    <dimen name="title_size">16sp</dimen>
-    <dimen name="title2_size">12sp</dimen>
-    <dimen name="title3_size">10sp</dimen>
+    <dimen name="title_selected_size">44sp</dimen>
+    <dimen name="title_size">22sp</dimen>
+    <dimen name="title2_size">18sp</dimen>
+    <dimen name="title3_size">16sp</dimen>
 
-    <dimen name="circle_button_padding">20dp</dimen>
+    <dimen name="button_padding">20dp</dimen>
 
 </resources>

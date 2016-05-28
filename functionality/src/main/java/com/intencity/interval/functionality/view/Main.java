@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.intencity.interval.functionality.R;
@@ -16,6 +16,13 @@ import com.intencity.interval.functionality.util.Constant;
 public class Main
 {
     private final int INTERVAL_MIN_THRESHOLD = 1;
+
+    private int layoutIntervalId;
+    private int layoutIntervalTimeId;
+    private int layoutIntervalRestId;
+    private int textViewIntervalId;
+    private int textViewIntervalTimeId;
+    private int textViewIntervalRestId;
 
     private int intervals;
     private int intervalSeconds;
@@ -29,11 +36,12 @@ public class Main
     // FROM UI
     private Context context;
 
-    private final int INTERVALS_ID;
-    private final int INTERVAL_TIME_ID;
-    private final int INTERVAL_REST_ID;
+    private LinearLayout intervalLayout;
+    private LinearLayout intervalTimeLayout;
+    private LinearLayout intervalRestLayout;
 
     private TextView titleTextView;
+    private TextView selectedTextView;
     private TextView intervalTextView;
     private TextView intervalTimeTextView;
     private TextView intervalRestTextView;
@@ -44,14 +52,15 @@ public class Main
 
     private Class<?> cls;
 
-    public Main(Context context, int INTERVALS_ID, int INTERVAL_TIME_ID, int INTERVAL_REST_ID, TextView titleTextView, TextView intervalTextView, TextView intervalTimeTextView, TextView intervalRestTextView, ImageButton incrementInterval, ImageButton decrementInterval,
-                Button start, Class<?> cls)
+    public Main(Context context, LinearLayout intervalLayout, LinearLayout intervalTimeLayout, LinearLayout intervalRestLayout, TextView titleTextView, TextView selectedTextView, TextView intervalTextView, TextView intervalTimeTextView,
+                TextView intervalRestTextView, ImageButton incrementInterval, ImageButton decrementInterval, Button start, Class<?> cls)
     {
         this.context = context;
-        this.INTERVALS_ID = INTERVALS_ID;
-        this.INTERVAL_TIME_ID = INTERVAL_TIME_ID;
-        this.INTERVAL_REST_ID = INTERVAL_REST_ID;
+        this.intervalLayout = intervalLayout;
+        this.intervalTimeLayout = intervalTimeLayout;
+        this.intervalRestLayout = intervalRestLayout;
         this.titleTextView = titleTextView;
+        this.selectedTextView = selectedTextView;
         this.intervalTextView = intervalTextView;
         this.intervalTimeTextView = intervalTimeTextView;
         this.intervalRestTextView = intervalRestTextView;
@@ -66,9 +75,16 @@ public class Main
 
     public void init()
     {
-        intervalTextView.setOnClickListener(intervalClickListener);
-        intervalTimeTextView.setOnClickListener(intervalClickListener);
-        intervalRestTextView.setOnClickListener(intervalClickListener);
+        layoutIntervalId = intervalLayout.getId();
+        layoutIntervalTimeId = intervalTimeLayout.getId();
+        layoutIntervalRestId = intervalRestLayout.getId();
+        textViewIntervalId = intervalTextView.getId();
+        textViewIntervalTimeId = intervalTimeTextView.getId();
+        textViewIntervalRestId = intervalRestTextView.getId();
+
+        intervalLayout.setOnClickListener(intervalClickListener);
+        intervalTimeLayout.setOnClickListener(intervalClickListener);
+        intervalRestLayout.setOnClickListener(intervalClickListener);
         incrementInterval.setOnClickListener(incrementIntervalClickListener);
         decrementInterval.setOnClickListener(decrementIntervalClickListener);
         start.setOnClickListener(startClickListener);
@@ -78,10 +94,6 @@ public class Main
         intervals = prefs.getInt(Constant.BUNDLE_INTERVALS, 1);
         intervalSeconds = prefs.getInt(Constant.BUNDLE_INTERVAL_MILLIS, 10);
         intervalRestSeconds = prefs.getInt(Constant.BUNDLE_INTERVAL_REST_MILLIS, 10);
-
-        setTextSize(intervalTextView, R.dimen.title3_size);
-        setTextSize(intervalTimeTextView, R.dimen.title3_size);
-        setTextSize(intervalRestTextView, R.dimen.title3_size);
 
         setText(intervalTextView, intervals);
         setText(intervalTimeTextView, intervalSeconds);
@@ -102,14 +114,26 @@ public class Main
     }
 
     /**
-     * Sets the text size of a textview.
+     * Sets the alpha of a layout.
      *
-     * @param textView  The textview we are updating.
-     * @param id        The resource dimen res id.
+     * @param textView  The current textview we have selected.
+     * @param alpha     The alpha we want to set to the layout.
      */
-    private void setTextSize(TextView textView, int id)
+    private void setLayoutAlpha(TextView textView, float alpha)
     {
-        textView.setTextSize(res.getDimensionPixelSize(id));
+        int id = textView.getId();
+        if (id == textViewIntervalId)
+        {
+            intervalLayout.setAlpha(alpha);
+        }
+        else if (id == textViewIntervalTimeId)
+        {
+            intervalTimeLayout.setAlpha(alpha);
+        }
+        else if (id == textViewIntervalRestId)
+        {
+            intervalRestLayout.setAlpha(alpha);
+        }
     }
 
     /**
@@ -121,31 +145,26 @@ public class Main
     {
         if (activeTextView != null)
         {
-            activeTextView.setBackgroundResource(0);
-            setTextSize(activeTextView, R.dimen.title3_size);
+            setLayoutAlpha(activeTextView, 0.66f);
         }
 
         activeTextView = textView;
-        activeTextView.setBackgroundResource(R.drawable.outline);
-        setTextSize(activeTextView, R.dimen.title_size);
+        setLayoutAlpha(activeTextView, 1.0f);
 
         int titleResId = R.string.title_intervals;
-        int gravity = Gravity.START;
 
         int id = textView.getId();
-        if (id == INTERVAL_TIME_ID)
+        if (id == textViewIntervalTimeId)
         {
             titleResId = R.string.title_interval_time;
-            gravity = Gravity.CENTER;
         }
-        else if (id == INTERVAL_REST_ID)
+        else if (id == textViewIntervalRestId)
         {
             titleResId = R.string.title_interval_rest;
-            gravity = Gravity.END;
         }
 
         titleTextView.setText(context.getString(titleResId));
-        titleTextView.setGravity(gravity);
+        selectedTextView.setText(activeTextView.getText().toString());
     }
 
     View.OnClickListener intervalClickListener = new View.OnClickListener()
@@ -153,7 +172,19 @@ public class Main
         @Override
         public void onClick(View v)
         {
-            setActiveTextView((TextView) v);
+            int id = v.getId();
+            if (id == layoutIntervalId)
+            {
+                setActiveTextView(intervalTextView);
+            }
+            else if (id == layoutIntervalTimeId)
+            {
+                setActiveTextView(intervalTimeTextView);
+            }
+            else if (id == layoutIntervalRestId)
+            {
+                setActiveTextView(intervalRestTextView);
+            }
         }
     };
 
@@ -163,17 +194,23 @@ public class Main
         public void onClick(View v)
         {
             int id = activeTextView.getId();
-            if (id == INTERVALS_ID)
+            if (id == textViewIntervalId)
             {
-                setText(intervalTextView, ++intervals);
+                intervals++;
+                setText(intervalTextView, intervals);
+                setText(selectedTextView, intervals);
             }
-            else if (id == INTERVAL_TIME_ID)
+            else if (id == textViewIntervalTimeId)
             {
-                setText(intervalTimeTextView, ++intervalSeconds);
+                intervalSeconds++;
+                setText(intervalTimeTextView, intervalSeconds);
+                setText(selectedTextView, intervalSeconds);
             }
-            else if (id == INTERVAL_REST_ID)
+            else if (id == textViewIntervalRestId)
             {
-                setText(intervalRestTextView, ++intervalRestSeconds);
+                intervalRestSeconds++;
+                setText(intervalRestTextView, intervalRestSeconds);
+                setText(selectedTextView, intervalRestSeconds);
             }
         }
     };
@@ -184,17 +221,23 @@ public class Main
         public void onClick(View v)
         {
             int id = activeTextView.getId();
-            if (id == INTERVALS_ID && intervals > INTERVAL_MIN_THRESHOLD)
+            if (id == textViewIntervalId && intervals > INTERVAL_MIN_THRESHOLD)
             {
-                setText(intervalTextView, --intervals);
+                intervals--;
+                setText(intervalTextView, intervals);
+                setText(selectedTextView, intervals);
             }
-            else if (id == INTERVAL_TIME_ID && intervalSeconds > INTERVAL_MIN_THRESHOLD)
+            else if (id == textViewIntervalTimeId && intervalSeconds > INTERVAL_MIN_THRESHOLD)
             {
-                setText(intervalTimeTextView, --intervalSeconds);
+                intervalSeconds--;
+                setText(intervalTimeTextView, intervalSeconds);
+                setText(selectedTextView, intervalSeconds);
             }
-            else if (id == INTERVAL_REST_ID && intervalRestSeconds > INTERVAL_MIN_THRESHOLD)
+            else if (id == textViewIntervalRestId && intervalRestSeconds > INTERVAL_MIN_THRESHOLD)
             {
-                setText(intervalRestTextView, --intervalRestSeconds);
+                intervalRestSeconds--;
+                setText(intervalRestTextView, intervalRestSeconds);
+                setText(selectedTextView, intervalRestSeconds);
             }
         }
     };

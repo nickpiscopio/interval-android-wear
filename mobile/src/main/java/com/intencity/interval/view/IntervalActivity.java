@@ -14,6 +14,8 @@ import com.intencity.interval.functionality.view.Interval;
 
 public class IntervalActivity extends AppCompatActivity
 {
+    private Interval interval;
+
     private BoxInsetLayout container;
 
     private DelayedConfirmationView delayedView;
@@ -42,6 +44,15 @@ public class IntervalActivity extends AppCompatActivity
 
         delayedView = (DelayedConfirmationView) findViewById(R.id.delayed_confirm);
 
-        new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout);
+        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        interval.destroy();
+        interval = null;
+
+        super.onBackPressed();
     }
 }

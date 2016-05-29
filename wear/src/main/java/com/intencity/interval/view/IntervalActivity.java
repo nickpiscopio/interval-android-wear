@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.support.wearable.view.DelayedConfirmationView;
+import android.support.wearable.view.DismissOverlayView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +17,11 @@ import com.intencity.interval.functionality.view.Interval;
 
 public class IntervalActivity extends WearableActivity
 {
+    private DismissOverlayView dismissOverlay;
+    private GestureDetector gestureDetector;
+
+    private Interval interval;
+
     private BoxInsetLayout container;
 
     private DelayedConfirmationView delayedView;
@@ -43,7 +51,44 @@ public class IntervalActivity extends WearableActivity
 
         delayedView = (DelayedConfirmationView) findViewById(R.id.delayed_confirm);
 
-        new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout);
+        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout);
+
+        initWearableMethods();
+    }
+
+    /**
+     * Initializes the wearable independent methods.
+     */
+    private void initWearableMethods()
+    {
+        // Obtain the DismissOverlayView element
+        dismissOverlay = (DismissOverlayView) findViewById(R.id.dismiss_overlay);
+        dismissOverlay.setIntroText(R.string.dismiss_view_instructions);
+        dismissOverlay.showIntroIfNecessary();
+
+        // Configure a gesture detector
+        gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener()
+        {
+            public void onLongPress(MotionEvent ev)
+            {
+                dismissOverlay.show();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        interval.destroy();
+        interval = null;
+
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev)
+    {
+        return gestureDetector.onTouchEvent(ev) || super.onTouchEvent(ev);
     }
 
     @Override

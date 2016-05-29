@@ -82,12 +82,12 @@ public class MainActivity extends WearableActivity
     {
 //        if (isAmbient())
 //        {
-//            containerView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.black));
+//            container.setBackgroundColor(ContextCompat.getColor(context, android.R.color.black));
 //            intervalTextView.setTextColor(ContextCompat.getColor(context, android.R.color.white));
 //        }
 //        else
 //        {
-//            containerView.setBackground(null);
+//            container.setBackgroundColor(ContextCompat.getColor(context, R.color.secondary_dark));
 //            intervalTextView.setTextColor(ContextCompat.getColor(context, R.color.secondary_dark));
 //        }
     }

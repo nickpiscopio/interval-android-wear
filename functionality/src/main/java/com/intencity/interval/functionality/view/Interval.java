@@ -87,6 +87,9 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         init();
     }
 
+    /**
+     * Initializes the view.
+     */
     public void init()
     {
         delayedView.setListener(this);
@@ -111,6 +114,14 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         startTimer(TimerState.INIT, Constant.CODE_FAILED);
     }
 
+    /**
+     * Stops the class.
+     */
+    public void destroy()
+    {
+        stopTimer();
+    }
+
     View.OnClickListener pauseClickLister = new View.OnClickListener()
     {
         @Override
@@ -119,7 +130,7 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
             switch (exerciseState)
             {
                 case ACTIVE:
-                    cancelTimer();
+                    stopTimer();
                     delayedView.setSelected(true);
                     pause.setImageResource(R.mipmap.play);
                     exerciseState = ExerciseState.INACTIVE;
@@ -146,6 +157,12 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         // User canceled, abort the action
     }
 
+    /**
+     * Starts the timer.
+     *
+     * @param state         The current state of the timer.
+     * @param millisLeft    The milliseconds left on the timer.
+     */
     private void startTimer(TimerState state, long millisLeft)
     {
         // The time we are displaying on the interval count down.
@@ -156,7 +173,7 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         {
             if (countDownTimer != null)
             {
-                cancelTimer();
+                stopTimer();
             }
 
             switch (activityState)
@@ -267,7 +284,10 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         notifyUserOfIntervalChange(vibrationDuration);
     }
 
-    private void cancelTimer()
+    /**
+     * Stops the timer.
+     */
+    private void stopTimer()
     {
         countDownTimer.cancel();
     }

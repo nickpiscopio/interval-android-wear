@@ -51,7 +51,7 @@ public class IntervalActivity extends WearableActivity
 
         delayedView = (DelayedConfirmationView) findViewById(R.id.delayed_confirm);
 
-        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout);
+        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout, CompletedActivity.class);
 
         initWearableMethods();
     }

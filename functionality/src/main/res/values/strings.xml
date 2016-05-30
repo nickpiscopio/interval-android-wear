@@ -24,4 +24,6 @@
     <string name="title_contributors">CONTRIBUTIONS</string>
     <string name="title_version">VERSION</string>
 
+    <string name="message_exercise_completed">Exercise Completed</string>
+
 </resources>

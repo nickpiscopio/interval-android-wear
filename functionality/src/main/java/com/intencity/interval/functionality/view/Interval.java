@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -71,7 +72,9 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
 
     private CountDownTimer countDownTimer;
 
-    public Interval(Context context, int intervals, int intervalSeconds, int intervalRestSeconds, BoxInsetLayout container, DelayedConfirmationView delayedView, TextView title, TextView timeLeftTextView, ImageButton pause, LinearLayout intervalLayout)
+    private Class completedClass;
+
+    public Interval(Context context, int intervals, int intervalSeconds, int intervalRestSeconds, BoxInsetLayout container, DelayedConfirmationView delayedView, TextView title, TextView timeLeftTextView, ImageButton pause, LinearLayout intervalLayout, Class completedClass)
     {
         this.context = context;
         this.intervals = intervals;
@@ -83,6 +86,7 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
         this.timeLeftTextView = timeLeftTextView;
         this.pause = pause;
         this.intervalLayout = intervalLayout;
+        this.completedClass = completedClass;
 
         init();
     }
@@ -256,6 +260,7 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
                         activityState = ActivityState.INTERVAL;
                         break;
                     case COOL_DOWN:
+                        setWorkoutComplete();
                     default:
                         // Do nothing
                         break;
@@ -308,6 +313,19 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    /**
+     * Pushes the completed workout view.
+     */
+    private void setWorkoutComplete()
+    {
+        notifyUserOfIntervalChange(new long[]{ 0, 500 });
+
+        Intent intent = new Intent(context, completedClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        context.startActivity(intent);
     }
 
     /**
@@ -424,7 +442,6 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
 
         final ObjectAnimator anim = ObjectAnimator.ofPropertyValuesHolder(title, PropertyValuesHolder.ofFloat("scaleX", scale), PropertyValuesHolder.ofFloat("scaleY", scale));
         anim.setDuration(duration);
-
         anim.setRepeatCount(1);
         anim.setRepeatMode(ObjectAnimator.REVERSE);
 

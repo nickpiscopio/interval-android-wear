@@ -12,6 +12,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppTheme.Base">
+        <item name="colorPrimaryDark">@color/accent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>

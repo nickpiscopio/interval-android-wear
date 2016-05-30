@@ -21,13 +21,19 @@
         </activity>
 
         <activity
-            android:name="com.intencity.interval.view.IntervalActivity"
+            android:name=".view.IntervalActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base"/>
 
         <activity
-            android:name="com.intencity.interval.view.AboutActivity"
+            android:name=".view.CompletedActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".view.AboutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base"/>

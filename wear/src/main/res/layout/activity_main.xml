@@ -169,7 +169,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/accent"
-            android:paddingTop="@dimen/start_screen_padding"
             android:text="@string/start"
             android:textColor="@android:color/white"
             android:layout_gravity="bottom"

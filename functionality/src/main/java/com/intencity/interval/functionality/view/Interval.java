@@ -35,10 +35,11 @@ import com.intencity.interval.functionality.util.states.TimerState;
 public class Interval
 {
     // 1 Minute for the WARM-UP / COOL DOWN.
-    private final int INJURY_PREVENTION_MILLIS = 12000;
+    private final int INJURY_PREVENTION_MILLIS = 10000;
 
     private long millisLeft;
 
+    private int intervalLayoutHeight;
     private int intervalItem = 0;
     private int currentInterval = 0;
 
@@ -109,11 +110,35 @@ public class Interval
 
         pause.setOnClickListener(pauseClickLister);
 
+        intervalLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
+            {
+                // Preventing extra work because method will be called many times.
+                if(intervalLayoutHeight == (bottom - top))
+                {
+                    return;
+                }
+
+                intervalLayoutHeight = (bottom - top);
+
+                addIntervalChart();
+
+                startTimer(TimerState.INIT, Constant.CODE_FAILED);
+            }
+        });
+
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+    }
 
-        addIntervalChart();
-
-        startTimer(TimerState.INIT, Constant.CODE_FAILED);
+    /**
+     * Pauses the timer.
+     */
+    public void pause()
+    {
+        stopTimer();
+        pause.setImageResource(R.mipmap.play);
+        exerciseState = ExerciseState.INACTIVE;
     }
 
     /**
@@ -132,9 +157,7 @@ public class Interval
             switch (exerciseState)
             {
                 case ACTIVE:
-                    stopTimer();
-                    pause.setImageResource(R.mipmap.play);
-                    exerciseState = ExerciseState.INACTIVE;
+                    pause();
                     break;
                 case INACTIVE:
                     startTimer(TimerState.RESTART, millisLeft);
@@ -351,7 +374,7 @@ public class Interval
      */
     private void insertIntervalItem(ActivityState state, int tagNumber)
     {
-        int height = res.getDimensionPixelSize(R.dimen.chart_interval_max_height);
+        int height = intervalLayoutHeight;
 
         switch (state)
         {
@@ -365,6 +388,7 @@ public class Interval
             case COOL_DOWN:
             default:
                 // We want this to be the max height since they are warm-up and cool down.
+                height *= getPercentage(convertToSeconds(INJURY_PREVENTION_MILLIS));
                 break;
         }
 
@@ -453,10 +477,16 @@ public class Interval
      *
      * @param seconds   The seconds of the interval item.
      *
-     * @return  The percentage to muliply the height of the interval item by.
+     * @return  The percentage to multiply the height of the interval item by.
      */
     private float getPercentage(int seconds)
     {
-        return (float) seconds / (float) (INJURY_PREVENTION_MILLIS / Constant.ONE_SECOND_MILLIS);
+        int maxMillis = INJURY_PREVENTION_MILLIS;
+        if (maxMillis < intervalSeconds || maxMillis < intervalRestSeconds)
+        {
+            maxMillis = intervalSeconds > intervalRestSeconds ? intervalSeconds : intervalRestSeconds;
+        }
+
+        return (float) seconds / (float) (maxMillis / Constant.ONE_SECOND_MILLIS);
     }
 }

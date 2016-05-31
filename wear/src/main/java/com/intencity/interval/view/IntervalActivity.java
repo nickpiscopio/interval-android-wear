@@ -6,6 +6,7 @@ import android.support.wearable.view.BoxInsetLayout;
 import android.support.wearable.view.DismissOverlayView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -77,6 +78,14 @@ public class IntervalActivity extends WearableActivity
     }
 
     @Override
+    protected void onStop()
+    {
+        interval.pause();
+
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy()
     {
         interval.destroy();
@@ -114,15 +123,18 @@ public class IntervalActivity extends WearableActivity
 
     private void updateDisplay()
     {
-//        if (isAmbient())
-//        {
+        if (isAmbient())
+        {
 //            containerView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.black));
 //            intervalTextView.setTextColor(ContextCompat.getColor(context, android.R.color.white));
-//        }
-//        else
-//        {
+            pause.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
 //            containerView.setBackground(null);
 //            intervalTextView.setTextColor(ContextCompat.getColor(context, R.color.secondary_dark));
-//        }
+
+            pause.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -219,7 +219,8 @@ public class Interval
             interval = (int) millisLeft;
         }
 
-        countDownTimer = new CountDownTimer(interval, Constant.ONE_SECOND_MILLIS)
+        // Every 2 milliseconds, the timer updates.
+        countDownTimer = new CountDownTimer(interval, 2)
         {
             public void onTick(long millisUntilFinished)
             {
@@ -227,7 +228,7 @@ public class Interval
                 timeLeftTextView.setText(String.valueOf(convertToSeconds(millisUntilFinished)));
 
                 long completedMillis = getTotalMillis() - millisUntilFinished;
-                float completedPercentage = Math.round(((float)completedMillis / (float)getTotalMillis()) * (float) 100);
+                float completedPercentage = ((float)completedMillis / (float)getTotalMillis()) * (float) 100;
                 progressBar.setProgress(completedPercentage);
             }
 
@@ -260,11 +261,6 @@ public class Interval
                 {
                     // We start the timer over until we finish all the intervals.
                     startTimer(TimerState.INIT, Constant.CODE_FAILED);
-                }
-                else
-                {
-                    // TODO: WILL NEED TO DO SOMETHING ELSE HERE WHEN ER ARE DONE EXERCISING.
-                    timeLeftTextView.setText("0");
                 }
             }
         };

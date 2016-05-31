@@ -125,4 +125,12 @@ public abstract class CountDownTimer {
             }
         }
     };
+
+    /**
+     * Gets the millis for the timer.
+     */
+    public long getTotalMillis()
+    {
+        return mMillisInFuture;
+    }
 }

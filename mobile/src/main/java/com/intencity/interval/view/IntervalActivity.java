@@ -3,12 +3,12 @@ package com.intencity.interval.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.wearable.view.BoxInsetLayout;
-import android.support.wearable.view.DelayedConfirmationView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.intencity.interval.R;
+import com.intencity.interval.functionality.util.CircleProgressBar;
 import com.intencity.interval.functionality.util.Constant;
 import com.intencity.interval.functionality.view.Interval;
 
@@ -18,7 +18,7 @@ public class IntervalActivity extends AppCompatActivity
 
     private BoxInsetLayout container;
 
-    private DelayedConfirmationView delayedView;
+    private CircleProgressBar progressBar;
     private TextView title;
     private TextView timeLeftTextView;
     private ImageButton pause;
@@ -42,9 +42,9 @@ public class IntervalActivity extends AppCompatActivity
         timeLeftTextView = (TextView) findViewById(R.id.time_left);
         pause = (ImageButton) findViewById(R.id.pause);
 
-        delayedView = (DelayedConfirmationView) findViewById(R.id.delayed_confirm);
+        progressBar = (CircleProgressBar) findViewById(R.id.progress_bar);
 
-        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, delayedView, title, timeLeftTextView, pause, intervalLayout, CompletedActivity.class);
+        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, progressBar, title, timeLeftTextView, pause, intervalLayout, CompletedActivity.class);
     }
 
     @Override

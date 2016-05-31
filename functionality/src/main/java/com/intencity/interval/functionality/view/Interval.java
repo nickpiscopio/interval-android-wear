@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.support.wearable.view.BoxInsetLayout;
-import android.support.wearable.view.DelayedConfirmationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.intencity.interval.functionality.R;
+import com.intencity.interval.functionality.util.CircleProgressBar;
 import com.intencity.interval.functionality.util.Constant;
 import com.intencity.interval.functionality.util.CountDownTimer;
 import com.intencity.interval.functionality.util.states.ActivityState;
@@ -32,7 +32,7 @@ import com.intencity.interval.functionality.util.states.TimerState;
  *
  * Created by Nick Piscopio on 5/26/16.
  */
-public class Interval implements DelayedConfirmationView.DelayedConfirmationListener
+public class Interval
 {
     // 1 Minute for the WARM-UP / COOL DOWN.
     private final int INJURY_PREVENTION_MILLIS = 12000;
@@ -64,24 +64,24 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
 
     private BoxInsetLayout container;
 
-    private DelayedConfirmationView delayedView;
     private TextView title;
     private TextView timeLeftTextView;
     private ImageButton pause;
     private LinearLayout intervalLayout;
 
     private CountDownTimer countDownTimer;
+    private CircleProgressBar progressBar;
 
     private Class completedClass;
 
-    public Interval(Context context, int intervals, int intervalSeconds, int intervalRestSeconds, BoxInsetLayout container, DelayedConfirmationView delayedView, TextView title, TextView timeLeftTextView, ImageButton pause, LinearLayout intervalLayout, Class completedClass)
+    public Interval(Context context, int intervals, int intervalSeconds, int intervalRestSeconds, BoxInsetLayout container, CircleProgressBar progressBar, TextView title, TextView timeLeftTextView, ImageButton pause, LinearLayout intervalLayout, Class completedClass)
     {
         this.context = context;
         this.intervals = intervals;
         this.intervalSeconds = intervalSeconds;
         this.intervalRestSeconds = intervalRestSeconds;
         this.container = container;
-        this.delayedView = delayedView;
+        this.progressBar = progressBar;
         this.title = title;
         this.timeLeftTextView = timeLeftTextView;
         this.pause = pause;
@@ -96,8 +96,6 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
      */
     public void init()
     {
-        delayedView.setListener(this);
-
         warmUpTitle = context.getString(R.string.title_warm_up);
         intervalTitle = context.getString(R.string.title_interval);
         restTitle = context.getString(R.string.title_rest);
@@ -135,7 +133,6 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
             {
                 case ACTIVE:
                     stopTimer();
-                    delayedView.setSelected(true);
                     pause.setImageResource(R.mipmap.play);
                     exerciseState = ExerciseState.INACTIVE;
                     break;
@@ -149,17 +146,6 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
             }
         }
     };
-
-    @Override
-    public void onTimerFinished(View view)
-    {
-        // User didn't cancel, perform the action
-    }
-
-    @Override
-    public void onTimerSelected(View view) {
-        // User canceled, abort the action
-    }
 
     /**
      * Starts the timer.
@@ -239,6 +225,10 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
             {
                 Interval.this.millisLeft = millisUntilFinished;
                 timeLeftTextView.setText(String.valueOf(convertToSeconds(millisUntilFinished)));
+
+                long completedMillis = getTotalMillis() - millisUntilFinished;
+                float completedPercentage = Math.round(((float)completedMillis / (float)getTotalMillis()) * (float) 100);
+                progressBar.setProgress(completedPercentage);
             }
 
             public void onFinish()
@@ -278,11 +268,6 @@ public class Interval implements DelayedConfirmationView.DelayedConfirmationList
                 }
             }
         };
-
-        // Two seconds to cancel the action
-        delayedView.setTotalTimeMs(interval);
-        // Start the timer
-        delayedView.start();
 
         countDownTimer.start();
 

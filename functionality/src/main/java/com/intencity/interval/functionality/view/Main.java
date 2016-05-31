@@ -167,7 +167,7 @@ public class Main
         selectedTextView.setText(activeTextView.getText().toString());
     }
 
-    View.OnClickListener intervalClickListener = new View.OnClickListener()
+    private View.OnClickListener intervalClickListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)
@@ -188,7 +188,7 @@ public class Main
         }
     };
 
-    View.OnClickListener incrementIntervalClickListener = new View.OnClickListener()
+    private View.OnClickListener incrementIntervalClickListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)
@@ -215,7 +215,7 @@ public class Main
         }
     };
 
-    View.OnClickListener decrementIntervalClickListener = new View.OnClickListener()
+    private View.OnClickListener decrementIntervalClickListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)
@@ -242,7 +242,7 @@ public class Main
         }
     };
 
-    View.OnClickListener startClickListener = new View.OnClickListener()
+    private View.OnClickListener startClickListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)

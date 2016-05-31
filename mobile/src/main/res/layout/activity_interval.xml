@@ -11,7 +11,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="@dimen/layout_margin"
+            android:layout_marginTop="?android:actionBarSize"
+            android:layout_marginLeft="@dimen/layout_margin"
+            android:layout_marginRight="@dimen/layout_margin"
+            android:layout_marginBottom="@dimen/layout_margin"
             app:layout_box="all">
 
             <TextView

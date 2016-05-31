@@ -10,6 +10,15 @@
         <item name="windowActionBar">true</item>
     </style>
 
+    <style name="Overlay" parent="AppTheme.Base">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppTheme.Base">
         <item name="colorPrimaryDark">@color/accent</item>

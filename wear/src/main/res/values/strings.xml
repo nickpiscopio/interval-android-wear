@@ -1,5 +1,5 @@
 <resources>
 
-    <string name="dismiss_view_instructions">Long press the screen to stop exercising.</string>
+    <string name="dismiss_view_instructions">Long press the screen to quit.</string>
 
 </resources>

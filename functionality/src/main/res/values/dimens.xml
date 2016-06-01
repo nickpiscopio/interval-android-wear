@@ -4,8 +4,12 @@
     <dimen name="divider_height">0.5dp</dimen>
     <dimen name="outline_width">1dp</dimen>
 
+    <dimen name="interval_icon_size">50dp</dimen>
+
     <dimen name="start_screen_padding">14dp</dimen>
 
+    <dimen name="layout_margin_large">46dp</dimen>
+    <dimen name="layout_margin_double">16dp</dimen>
     <dimen name="layout_margin">8dp</dimen>
     <dimen name="layout_margin_half">4dp</dimen>
     <dimen name="layout_margin_quarter">2dp</dimen>

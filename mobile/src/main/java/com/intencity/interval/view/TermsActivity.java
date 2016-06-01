@@ -1,24 +1,19 @@
 package com.intencity.interval.view;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.webkit.WebView;
 
 import com.intencity.interval.R;
-
 
 /**
  * This is the terms activity for Intencity.
  *
- * Created by Nick Piscopio on 1/11/16.
+ * Created by Nick Piscopio on 6/1/16.
  */
 public class TermsActivity extends AppCompatActivity
 {
-    private final String TERMS_URL = "file:///android_asset/terms.html";
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,10 +26,6 @@ public class TermsActivity extends AppCompatActivity
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        WebView webview = (WebView)findViewById(R.id.web_view_terms);
-        webview.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.page_background));
-        webview.loadUrl(TERMS_URL);
     }
 
     @Override

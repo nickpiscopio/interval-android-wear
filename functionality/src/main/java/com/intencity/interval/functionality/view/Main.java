@@ -1,9 +1,9 @@
 package com.intencity.interval.functionality.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -28,13 +28,14 @@ public class Main
     private int intervalSeconds;
     private int intervalRestSeconds;
 
-    private Resources res;
     private SharedPreferences prefs;
 
     private TextView activeTextView;
 
-    // FROM UI
     private Context context;
+
+    // FROM UI
+    private Activity activity;
 
     private LinearLayout intervalLayout;
     private LinearLayout intervalTimeLayout;
@@ -50,12 +51,13 @@ public class Main
 
     private Button start;
 
-    private Class<?> cls;
+    private Class<?> agreementActivity;
+    private Class<?> intervalActivity;
 
-    public Main(Context context, LinearLayout intervalLayout, LinearLayout intervalTimeLayout, LinearLayout intervalRestLayout, TextView titleTextView, TextView selectedTextView, TextView intervalTextView, TextView intervalTimeTextView,
-                TextView intervalRestTextView, ImageButton incrementInterval, ImageButton decrementInterval, Button start, Class<?> cls)
+    public Main(Activity activity, LinearLayout intervalLayout, LinearLayout intervalTimeLayout, LinearLayout intervalRestLayout, TextView titleTextView, TextView selectedTextView, TextView intervalTextView, TextView intervalTimeTextView,
+                TextView intervalRestTextView, ImageButton incrementInterval, ImageButton decrementInterval, Button start, Class<?> agreementActivity, Class<?> intervalActivity)
     {
-        this.context = context;
+        this.activity = activity;
         this.intervalLayout = intervalLayout;
         this.intervalTimeLayout = intervalTimeLayout;
         this.intervalRestLayout = intervalRestLayout;
@@ -68,12 +70,46 @@ public class Main
         this.decrementInterval = decrementInterval;
         this.start = start;
 
-        this.cls = cls;
+        this.agreementActivity = agreementActivity;
+        this.intervalActivity = intervalActivity;
 
         init();
     }
 
+    /**
+     * Determines which view to initialize.
+     */
     public void init()
+    {
+        context = activity.getApplicationContext();
+        prefs = context.getSharedPreferences(Constant.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+
+        // If the user has already agreed to the terms of use.
+        if(prefs.getBoolean(Constant.AGREED_TO_TERMS, false))
+        {
+            initMain();
+        }
+        else
+        {
+            initAgreement();
+        }
+    }
+
+    /**
+     * Initializes the agreement screen.
+     */
+    public void initAgreement()
+    {
+        Intent intent = new Intent(context, agreementActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        activity.finish();
+    }
+
+    /**
+     * Initializes the start screen.
+     */
+    public void initMain()
     {
         layoutIntervalId = intervalLayout.getId();
         layoutIntervalTimeId = intervalTimeLayout.getId();
@@ -89,8 +125,6 @@ public class Main
         decrementInterval.setOnClickListener(decrementIntervalClickListener);
         start.setOnClickListener(startClickListener);
 
-        res = context.getResources();
-        prefs = context.getSharedPreferences(Constant.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         intervals = prefs.getInt(Constant.BUNDLE_INTERVALS, 1);
         intervalSeconds = prefs.getInt(Constant.BUNDLE_INTERVAL_MILLIS, 10);
         intervalRestSeconds = prefs.getInt(Constant.BUNDLE_INTERVAL_REST_MILLIS, 10);
@@ -253,7 +287,7 @@ public class Main
             editor.putInt(Constant.BUNDLE_INTERVAL_REST_MILLIS, intervalRestSeconds);
             editor.apply();
 
-            Intent intent = new Intent(context, cls);
+            Intent intent = new Intent(context, intervalActivity);
             intent.putExtra(Constant.BUNDLE_INTERVALS, intervals);
             intent.putExtra(Constant.BUNDLE_INTERVAL_MILLIS, intervalSeconds * Constant.ONE_SECOND_MILLIS);
             intent.putExtra(Constant.BUNDLE_INTERVAL_REST_MILLIS, intervalRestSeconds * Constant.ONE_SECOND_MILLIS);

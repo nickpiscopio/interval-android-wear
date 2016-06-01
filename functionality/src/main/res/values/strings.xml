@@ -26,4 +26,17 @@
 
     <string name="message_exercise_completed">Exercise Completed</string>
 
+    <string name="terms_agreement">By using Interval, you agree to the @Terms of Use@.</string>
+    <string name="get_started">GET STARTED</string>
+
+    <!-- Terms -->
+    <string name="terms_title">TERMS OF USE</string>
+    <string name="terms_updated_date">UPDATED DATE\nJune 1, 2016</string>
+    <string name="terms_list_item_1">I, the user, hereby referred to as "The User", agree that The User is using Interval, hereby referred to as "The App", from The User\'s own free will.</string>
+    <string name="terms_list_item_2">The User also agrees that the use of The App is completely voluntary and The User is not being forced to use The App.</string>
+    <string name="terms_list_item_3">The User agrees that the age requirement to use The App is 18 years old or older. The User agrees that if The User is not of the age requirement for The App, The User will not use The App.</string>
+    <string name="terms_list_item_4">The User agrees to consult a physician before starting and during the use of The App.</string>
+    <string name="terms_list_item_5">The User agrees that the creators and developers of The App are in no way shape or form fitness professionals, and should take everything in The App as suggestions.</string>
+    <string name="terms_list_item_6">The User agrees to take full responsibility for any injury caused before, during, or after use of The App. The User agrees that any injury caused before, during, or after use of The App is of no fault to The App, creators, or developers of the App. The User also agrees that if The User feels any pain during The User\'s use of The App, The User will stop use of The App immediately until The User consults a physician and the physician consents that use of The App is allowed again.</string>
+
 </resources>

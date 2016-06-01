@@ -1,6 +1,5 @@
 package com.intencity.interval.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,45 +18,26 @@ public class MainActivity extends AppCompatActivity
 {
     private final int MENU_ID = R.id.menu;
 
-    private MenuItem menuItem;
-
-    private Context context;
-
-    private LinearLayout intervalLayout;
-    private LinearLayout intervalTimeLayout;
-    private LinearLayout intervalRestLayout;
-    private TextView titleTextView;
-    private TextView selectedTextView;
-    private TextView intervalTextView;
-    private TextView intervalTimeTextView;
-    private TextView intervalRestTextView;
-    private ImageButton incrementInterval;
-    private ImageButton decrementInterval;
-
-    private Button start;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        context = getApplicationContext();
+        LinearLayout intervalLayout = (LinearLayout) findViewById(R.id.layout_intervals);
+        LinearLayout intervalTimeLayout = (LinearLayout) findViewById(R.id.layout_interval_time);
+        LinearLayout intervalRestLayout = (LinearLayout) findViewById(R.id.layout_interval_rest);
 
-        intervalLayout = (LinearLayout) findViewById(R.id.layout_intervals);
-        intervalTimeLayout = (LinearLayout) findViewById(R.id.layout_interval_time);
-        intervalRestLayout = (LinearLayout) findViewById(R.id.layout_interval_rest);
+        TextView titleTextView = (TextView)findViewById(R.id.title);
+        TextView selectedTextView = (TextView)findViewById(R.id.text_view_editing);
+        TextView intervalTextView = (TextView)findViewById(R.id.text_view_interval);
+        TextView intervalTimeTextView = (TextView)findViewById(R.id.text_view_interval_time);
+        TextView intervalRestTextView = (TextView)findViewById(R.id.text_view_interval_rest);
+        ImageButton incrementInterval = (ImageButton)findViewById(R.id.button_increment);
+        ImageButton decrementInterval = (ImageButton)findViewById(R.id.button_decrement);
+        Button start = (Button) findViewById(R.id.start);
 
-        titleTextView = (TextView)findViewById(R.id.title);
-        selectedTextView = (TextView)findViewById(R.id.text_view_editing);
-        intervalTextView = (TextView)findViewById(R.id.text_view_interval);
-        intervalTimeTextView = (TextView)findViewById(R.id.text_view_interval_time);
-        intervalRestTextView = (TextView)findViewById(R.id.text_view_interval_rest);
-        incrementInterval = (ImageButton)findViewById(R.id.button_increment);
-        decrementInterval = (ImageButton)findViewById(R.id.button_decrement);
-        start = (Button) findViewById(R.id.start);
-
-        new Main(context, intervalLayout, intervalTimeLayout, intervalRestLayout, titleTextView, selectedTextView, intervalTextView, intervalTimeTextView, intervalRestTextView, incrementInterval, decrementInterval, start, IntervalActivity.class);
+        new Main(this, intervalLayout, intervalTimeLayout, intervalRestLayout, titleTextView, selectedTextView, intervalTextView, intervalTimeTextView, intervalRestTextView, incrementInterval, decrementInterval, start, AgreementActivity.class, IntervalActivity.class);
     }
 
     @Override
@@ -65,8 +45,6 @@ public class MainActivity extends AppCompatActivity
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-
-        menuItem = menu.findItem(MENU_ID);
 
         return true;
     }

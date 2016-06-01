@@ -12,6 +12,8 @@ public class Constant
 
     public static final String SHARED_PREFERENCES = "com.intencity.interval.shared.preferences";
 
+    public static final String AGREED_TO_TERMS = "com.intencity.interval.agreed.to.terms";
+
     public static final String BUNDLE_INTERVALS = "com.intencity.interval.intervals";
     public static final String BUNDLE_INTERVAL_MILLIS = "com.intencity.interval.interval.millis";
     public static final String BUNDLE_INTERVAL_REST_MILLIS = "com.intencity.interval.intervals.rest.millis";

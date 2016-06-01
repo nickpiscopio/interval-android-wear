@@ -54,7 +54,7 @@ public class MainActivity extends WearableActivity
         decrementInterval = (ImageButton)findViewById(R.id.button_decrement);
         start = (Button) findViewById(R.id.start);
 
-        new Main(context, intervalLayout, intervalTimeLayout, intervalRestLayout, titleTextView, selectedTextView, intervalTextView, intervalTimeTextView, intervalRestTextView, incrementInterval, decrementInterval, start, IntervalActivity.class);
+        new Main(this, intervalLayout, intervalTimeLayout, intervalRestLayout, titleTextView, selectedTextView, intervalTextView, intervalTimeTextView, intervalRestTextView, incrementInterval, decrementInterval, start, AgreementActivity.class, IntervalActivity.class);
     }
 
     @Override

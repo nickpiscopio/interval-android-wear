@@ -1,11 +1,15 @@
 package com.intencity.interval.view;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.intencity.interval.R;
@@ -30,17 +34,19 @@ public class AboutActivity extends AppCompatActivity
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        TextView versionTextView = (TextView) findViewById(R.id.text_view_version);
-
         try
         {
             String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            TextView versionTextView = (TextView) findViewById(R.id.text_view_version);
             versionTextView.setText(versionName);
         }
         catch (PackageManager.NameNotFoundException e)
         {
             Log.i("Couldn't find version", "Couldn't find version " + e.toString());
         }
+
+        LinearLayout intencityLayout = (LinearLayout) findViewById(R.id.intencity_layout);
+        intencityLayout.setOnClickListener(intencityClickListener);
     }
 
     @Override
@@ -55,4 +61,13 @@ public class AboutActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(menuItem);
         }
     }
+
+    private View.OnClickListener intencityClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://intencity.fit")));
+        }
+    };
 }

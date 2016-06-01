@@ -1,5 +1,5 @@
 <resources>
 
-    <string name="dismiss_view_instructions">Long press the screen to quit.</string>
+    <string name="dismiss_view_instructions">Long press to quit.</string>
 
 </resources>

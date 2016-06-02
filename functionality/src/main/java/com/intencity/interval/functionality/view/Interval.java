@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.support.wearable.view.BoxInsetLayout;
@@ -183,6 +184,7 @@ public class Interval
     {
         // The time we are displaying on the interval count down.
         int interval = 0;
+        int soundResId = Constant.CODE_FAILED;
         long[] vibrationDuration = { 0, 250 };
 
         if (state == TimerState.INIT)
@@ -209,6 +211,7 @@ public class Interval
                     scaleTitle();
                     interval = intervalSeconds;
 
+                    soundResId = R.raw.interval_beep;
                     vibrationDuration = new long[]{ 0, 500 };
                     break;
                 case REST:
@@ -217,6 +220,7 @@ public class Interval
                     scaleTitle();
                     interval = intervalRestSeconds;
 
+                    soundResId = R.raw.rest_beep;
                     // 3 vibrations
                     vibrationDuration = new long[]{ 0, 100, 100, 100, 100, 100 };
                     break;
@@ -226,6 +230,7 @@ public class Interval
                     scaleTitle();
                     interval = INJURY_PREVENTION_MILLIS;
 
+                    soundResId = R.raw.start_stop_beep;
                     // 2 vibrations
                     vibrationDuration = new long[]{ 0, 250, 250, 250 };
                     break;
@@ -293,7 +298,7 @@ public class Interval
 
         countDownTimer.start();
 
-        notifyUserOfIntervalChange(vibrationDuration);
+        notifyUserOfIntervalChange(soundResId, vibrationDuration);
     }
 
     /**
@@ -307,19 +312,18 @@ public class Interval
     /**
      * Notifies the user of an interval change.
      *
+     * @param soundResId    The resource id for the sound to play.
      * @param duration      The pattern duration to vibrate.
      */
-    private void notifyUserOfIntervalChange(long[] duration)
+    private void notifyUserOfIntervalChange(int soundResId, long[] duration)
     {
         vibrator.vibrate(duration, Constant.CODE_FAILED);
 
-//        try {
-//            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//            Ringtone r = RingtoneManager.getRingtone(context, notification);
-//            r.play();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        if (soundResId > Constant.CODE_FAILED)
+        {
+            MediaPlayer mediaPlayer = MediaPlayer.create(context, soundResId);
+            mediaPlayer.start();
+        }
     }
 
     /**
@@ -327,7 +331,7 @@ public class Interval
      */
     private void setWorkoutComplete()
     {
-        notifyUserOfIntervalChange(new long[]{ 0, 500 });
+        notifyUserOfIntervalChange(R.raw.start_stop_beep, new long[]{ 0, 500 });
 
         Intent intent = new Intent(context, completedClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

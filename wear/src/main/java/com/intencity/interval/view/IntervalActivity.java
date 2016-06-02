@@ -7,7 +7,7 @@ import android.support.wearable.view.DismissOverlayView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,7 +28,8 @@ public class IntervalActivity extends WearableActivity
     private CircleProgressBar progressBar;
     private TextView title;
     private TextView timeLeftTextView;
-    private ImageButton pause;
+    private ImageView pause;
+    private LinearLayout timeLeftLayout;
     private LinearLayout intervalLayout;
 
     @Override
@@ -45,14 +46,15 @@ public class IntervalActivity extends WearableActivity
         int intervalRestSeconds = extras.getInt(Constant.BUNDLE_INTERVAL_REST_MILLIS);
 
         container = (BoxInsetLayout) findViewById(R.id.container);
+        timeLeftLayout = (LinearLayout) findViewById(R.id.layout_time_left);
         intervalLayout = (LinearLayout) findViewById(R.id.layout_intervals);
         title = (TextView) findViewById(R.id.title);
         timeLeftTextView = (TextView) findViewById(R.id.time_left);
-        pause = (ImageButton) findViewById(R.id.pause);
+        pause = (ImageView) findViewById(R.id.pause);
 
         progressBar = (CircleProgressBar) findViewById(R.id.progress_bar);
 
-        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, progressBar, title, timeLeftTextView, pause, intervalLayout, CompletedActivity.class);
+        interval = new Interval(getApplicationContext(), intervals, intervalSeconds, intervalRestSeconds, container, progressBar, title, timeLeftTextView, pause, timeLeftLayout, intervalLayout, CompletedActivity.class);
 
         initWearableMethods();
     }

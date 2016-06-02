@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,14 +20,6 @@ import com.intencity.interval.functionality.view.Interval;
 public class IntervalActivity extends AppCompatActivity
 {
     private Interval interval;
-
-    private BoxInsetLayout container;
-
-    private CircleProgressBar progressBar;
-    private TextView title;
-    private TextView timeLeftTextView;
-    private ImageButton pause;
-    private LinearLayout intervalLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,15 +45,16 @@ public class IntervalActivity extends AppCompatActivity
         int intervalSeconds = extras.getInt(Constant.BUNDLE_INTERVAL_MILLIS);
         int intervalRestSeconds = extras.getInt(Constant.BUNDLE_INTERVAL_REST_MILLIS);
 
-        container = (BoxInsetLayout) findViewById(R.id.container);
-        intervalLayout = (LinearLayout) findViewById(R.id.layout_intervals);
-        title = (TextView) findViewById(R.id.title);
-        timeLeftTextView = (TextView) findViewById(R.id.time_left);
-        pause = (ImageButton) findViewById(R.id.pause);
+        BoxInsetLayout container = (BoxInsetLayout) findViewById(R.id.container);
+        LinearLayout timeLeftLayout = (LinearLayout) findViewById(R.id.layout_time_left);
+        LinearLayout intervalLayout = (LinearLayout) findViewById(R.id.layout_intervals);
+        TextView title = (TextView) findViewById(R.id.title);
+        TextView timeLeftTextView = (TextView) findViewById(R.id.time_left);
+        ImageView pause = (ImageView) findViewById(R.id.pause);
 
-        progressBar = (CircleProgressBar) findViewById(R.id.progress_bar);
+        CircleProgressBar progressBar = (CircleProgressBar) findViewById(R.id.progress_bar);
 
-        interval = new Interval(context, intervals, intervalSeconds, intervalRestSeconds, container, progressBar, title, timeLeftTextView, pause, intervalLayout, CompletedActivity.class);
+        interval = new Interval(context, intervals, intervalSeconds, intervalRestSeconds, container, progressBar, title, timeLeftTextView, pause, timeLeftLayout, intervalLayout, CompletedActivity.class);
     }
 
     @Override

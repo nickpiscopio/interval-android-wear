@@ -53,14 +53,17 @@
                     app:progressbarColor="@color/accent"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:id="@+id/layout_time_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
+                    android:padding="@dimen/layout_margin"
+                    android:foreground="?android:selectableItemBackground"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/layout_margin_half"
                         android:paddingRight="0dp"
@@ -72,7 +75,7 @@
                             android:id="@+id/time_left"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
+                            android:gravity="center"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/interval_time_size"
                             android:text="30"/>
@@ -80,19 +83,19 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
                             android:textColor="@color/white_transparent"
                             android:textSize="@dimen/title_size"
                             android:text="@string/seconds"/>
 
                     </LinearLayout>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/pause"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/pause"
-                        android:background="@null"/>
+                        android:background="@null"
+                        android:alpha=".66"/>
 
                 </LinearLayout>
 

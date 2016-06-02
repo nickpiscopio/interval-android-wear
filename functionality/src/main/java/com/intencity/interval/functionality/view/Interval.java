@@ -14,7 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -67,7 +67,8 @@ public class Interval
 
     private TextView title;
     private TextView timeLeftTextView;
-    private ImageButton pause;
+    private ImageView pause;
+    private LinearLayout timeLeftlayout;
     private LinearLayout intervalLayout;
 
     private CountDownTimer countDownTimer;
@@ -75,7 +76,7 @@ public class Interval
 
     private Class completedClass;
 
-    public Interval(Context context, int intervals, int intervalSeconds, int intervalRestSeconds, BoxInsetLayout container, CircleProgressBar progressBar, TextView title, TextView timeLeftTextView, ImageButton pause, LinearLayout intervalLayout, Class completedClass)
+    public Interval(Context context, int intervals, int intervalSeconds, int intervalRestSeconds, BoxInsetLayout container, CircleProgressBar progressBar, TextView title, TextView timeLeftTextView, ImageView pause, LinearLayout timeLeftlayout, LinearLayout intervalLayout, Class completedClass)
     {
         this.context = context;
         this.intervals = intervals;
@@ -86,6 +87,7 @@ public class Interval
         this.title = title;
         this.timeLeftTextView = timeLeftTextView;
         this.pause = pause;
+        this.timeLeftlayout = timeLeftlayout;
         this.intervalLayout = intervalLayout;
         this.completedClass = completedClass;
 
@@ -108,7 +110,7 @@ public class Interval
         activityState = ActivityState.WARM_UP;
         exerciseState = ExerciseState.ACTIVE;
 
-        pause.setOnClickListener(pauseClickLister);
+        timeLeftlayout.setOnClickListener(pauseClickLister);
 
         intervalLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener()
         {

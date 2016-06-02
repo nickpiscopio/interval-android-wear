@@ -6,7 +6,7 @@ import android.support.wearable.activity.WearableActivity;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.intencity.interval.R;
@@ -16,7 +16,7 @@ public class MainActivity extends WearableActivity
 {
     private Context context;
 
-    private RelativeLayout container;
+    private ScrollView container;
 
     private LinearLayout intervalLayout;
     private LinearLayout intervalTimeLayout;
@@ -39,7 +39,7 @@ public class MainActivity extends WearableActivity
 
         context = getApplicationContext();
 
-        container = (RelativeLayout) findViewById(R.id.container);
+        container = (ScrollView) findViewById(R.id.container);
 
         intervalLayout = (LinearLayout) findViewById(R.id.layout_intervals);
         intervalTimeLayout = (LinearLayout) findViewById(R.id.layout_interval_time);

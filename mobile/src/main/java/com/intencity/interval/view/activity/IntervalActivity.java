@@ -1,4 +1,4 @@
-package com.intencity.interval.view;
+package com.intencity.interval.view.activity;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;

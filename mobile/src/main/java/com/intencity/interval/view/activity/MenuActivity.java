@@ -1,4 +1,4 @@
-package com.intencity.interval.view;
+package com.intencity.interval.view.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

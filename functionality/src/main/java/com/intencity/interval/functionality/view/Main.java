@@ -51,11 +51,11 @@ public class Main
 
     private Button start;
 
-    private Class<?> agreementActivity;
+    private Class<?> demoActivity;
     private Class<?> intervalActivity;
 
     public Main(Activity activity, LinearLayout intervalLayout, LinearLayout intervalTimeLayout, LinearLayout intervalRestLayout, TextView titleTextView, TextView selectedTextView, TextView intervalTextView, TextView intervalTimeTextView,
-                TextView intervalRestTextView, ImageButton incrementInterval, ImageButton decrementInterval, Button start, Class<?> agreementActivity, Class<?> intervalActivity)
+                TextView intervalRestTextView, ImageButton incrementInterval, ImageButton decrementInterval, Button start, Class<?> demoActivity, Class<?> intervalActivity)
     {
         this.activity = activity;
         this.intervalLayout = intervalLayout;
@@ -70,7 +70,7 @@ public class Main
         this.decrementInterval = decrementInterval;
         this.start = start;
 
-        this.agreementActivity = agreementActivity;
+        this.demoActivity = demoActivity;
         this.intervalActivity = intervalActivity;
 
         init();
@@ -100,7 +100,7 @@ public class Main
      */
     public void initAgreement()
     {
-        Intent intent = new Intent(context, agreementActivity);
+        Intent intent = new Intent(context, demoActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         activity.finish();

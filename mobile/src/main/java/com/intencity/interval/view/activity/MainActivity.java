@@ -1,4 +1,4 @@
-package com.intencity.interval.view;
+package com.intencity.interval.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         ImageButton decrementInterval = (ImageButton)findViewById(R.id.button_decrement);
         Button start = (Button) findViewById(R.id.start);
 
-        new Main(this, intervalLayout, intervalTimeLayout, intervalRestLayout, titleTextView, selectedTextView, intervalTextView, intervalTimeTextView, intervalRestTextView, incrementInterval, decrementInterval, start, AgreementActivity.class, IntervalActivity.class);
+        new Main(this, intervalLayout, intervalTimeLayout, intervalRestLayout, titleTextView, selectedTextView, intervalTextView, intervalTimeTextView, intervalRestTextView, incrementInterval, decrementInterval, start, DemoActivity.class, IntervalActivity.class);
     }
 
     @Override

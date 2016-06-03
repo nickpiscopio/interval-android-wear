@@ -1,4 +1,4 @@
-package com.intencity.interval.view;
+package com.intencity.interval.view.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;

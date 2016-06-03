@@ -36,7 +36,7 @@ import com.intencity.interval.functionality.util.states.TimerState;
 public class Interval
 {
     // 1 Minute for the WARM-UP / COOL DOWN.
-    private final int INJURY_PREVENTION_MILLIS = 10000;
+    private final int INJURY_PREVENTION_MILLIS = 60000;
 
     private long millisLeft;
 

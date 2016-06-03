@@ -1,5 +1,14 @@
 <resources>
 
+    <!-- Demo -->
+    <string name="title_timer">Keep Your Concentration</string>
+    <string name="title_watch">Go Mobile</string>
+
+    <string name="description_interval">A robust fitness timer.</string>
+    <string name="description_timer">Get notified of interval changes without looking at the screen.</string>
+    <string name="description_watch">Take your timer with you on Android Wear.</string>
+
+
     <string name="title_app">App</string>
     <string name="title_settings">Settings</string>
     <string name="title_about">About</string>

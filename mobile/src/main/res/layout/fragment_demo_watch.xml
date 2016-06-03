@@ -8,23 +8,23 @@
     android:background="@color/secondary_dark"
     android:gravity="center_vertical">
 
-    <!--<TextView-->
-        <!--style="@style/demo_title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/demo_fitness_direction_title"/>-->
+    <TextView
+        style="@style/demo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_watch"/>
 
-    <!--<TextView-->
-        <!--style="@style/demo_text"-->
-        <!--android:layout_width="325dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/demo_fitness_direction_description"/>-->
+    <TextView
+        style="@style/demo_text"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:text="@string/description_watch"/>
 
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginBottom="@dimen/layout_margin"-->
-        <!--android:src="@mipmap/demo_directions"/>-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/layout_margin"
+        android:src="@mipmap/demo_watch"/>
 
 </LinearLayout>

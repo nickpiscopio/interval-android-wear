@@ -51,15 +51,16 @@
 
         </LinearLayout>
 
-        <!--<ImageButton-->
-            <!--android:id="@+id/button_next"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/button_next"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:background="@null"/>-->
-
     </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/next_light"
+        android:layout_margin="@dimen/layout_margin"/>
 
 </RelativeLayout>

@@ -50,9 +50,9 @@ public class MenuActivity extends AppCompatActivity
         contributeTitle = getString(R.string.title_contribute);
 
         menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem(getString(R.string.title_settings), null));
+//        menuItems.add(new MenuItem(getString(R.string.title_settings), null));
 
-        menuItems.add(new MenuItem(getString(R.string.title_app), null));
+//        menuItems.add(new MenuItem(getString(R.string.title_app), null));
         menuItems.add(new MenuItem(getString(R.string.title_about), AboutActivity.class));
         menuItems.add(new MenuItem(getString(R.string.title_terms), TermsActivity.class, null));
         menuItems.add(new MenuItem(rateTitle, null));

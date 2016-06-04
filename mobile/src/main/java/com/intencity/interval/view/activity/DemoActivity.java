@@ -1,10 +1,10 @@
 package com.intencity.interval.view.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -35,7 +35,7 @@ public class DemoActivity extends FragmentActivity
     private ImageView pager1;
     private ImageView pager2;
 
-    private ImageButton next;
+    private FloatingActionButton next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,8 +56,8 @@ public class DemoActivity extends FragmentActivity
         pager1 = (ImageView) findViewById(R.id.pager_1);
         pager2 = (ImageView) findViewById(R.id.pager_2);
 
-//        next = (ImageButton) findViewById(R.id.button_next);
-//        next.setOnClickListener(nextListener);
+        next = (FloatingActionButton) findViewById(R.id.button_next);
+        next.setOnClickListener(nextListener);
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(adapter);
@@ -127,9 +127,11 @@ public class DemoActivity extends FragmentActivity
                     pager1.setImageResource(PAGER_UNSELECTED_RESOURCE);
                     pager2.setImageResource(PAGER_SELECTED_RESOURCE);
 
+                    next.setVisibility(View.VISIBLE);
                     navigation.setVisibility(View.VISIBLE);
                     break;
                 case AGREEMENT:
+                    next.setVisibility(View.GONE);
                     navigation.setVisibility(View.GONE);
                     break;
                 default:
